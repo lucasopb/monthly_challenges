@@ -1,6 +1,7 @@
 from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect
+from django.http import Http404, HttpResponseNotFound, HttpResponseRedirect
 from django.urls import reverse
+from django.template.loader import render_to_string
 
 
 monthly_challengens = {
@@ -15,7 +16,7 @@ monthly_challengens = {
     "september": "dance",
     "october": "talk with mom",
     "november": "rest",
-    "december": "pray",
+    "december": None,
     
 }
 
@@ -39,15 +40,13 @@ def monthly_challenge(request, month):
             "month": month
         })
     except:
-        return HttpResponseNotFound("<h1>error<h1>")
+        response_data = render_to_string("404.html")
+        raise Http404()
 
 
 def home_page(request):
-    list_itens = ""
     months = list(monthly_challengens.keys())
-    for month in months:
-        foward_path = reverse("month-challenge", args=[month])
-        list_itens += f"<li><a href={foward_path}>{month.capitalize()}</a></li>"
-        
-    return HttpResponse(f"<ul>{list_itens}</ul>")
+    return render(request, "challenges/index.html", {
+        "months": months
+    })
         
