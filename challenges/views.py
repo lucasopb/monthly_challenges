@@ -41,7 +41,7 @@ def monthly_challenge(request, month):
         })
     except:
         response_data = render_to_string("404.html")
-        raise Http404()
+        raise Http404(response_data)
 
 
 def home_page(request):
