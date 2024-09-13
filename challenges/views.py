@@ -6,7 +6,7 @@ from django.template.loader import render_to_string
 
 monthly_challengens = {
     "january": "walk",
-    "february": "run",
+    "february": None,
     "march": "swin",
     "april": "work out",
     "may": "eat",
