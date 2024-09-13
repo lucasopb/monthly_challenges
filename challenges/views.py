@@ -29,7 +29,7 @@ def monthly_cha_num(request, month):
         foward_path = reverse("month-challenge", args=[foward_month])# /challenges/"month"
         return HttpResponseRedirect(foward_path)
     except:
-        return HttpResponseNotFound("<h1>error<h1>")
+        return HttpResponseNotFound("<h1>Error<h1>")
 
 
 def monthly_challenge(request, month):
